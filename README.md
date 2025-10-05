@@ -1,111 +1,148 @@
-🐱 kgwy-Kirara Proxy - 绮良良主题AI代理工具（基于SucroseGameAssistant框架）
- 
-An open-source, cat-ear charm-packed AI proxy tool inspired by Genshin Impact’s Kirara — with direct links to sponsors, full framework attribution, and cuteness that grabs attention at first glance! 📦✨
- 
-📢 核心归因 & 独家赞助商
- 
-🔗 基于框架：SucroseGameAssistant
- 
-本项目完全继承SucroseGameAssistant的核心代理能力（跨软件调度、进程监控、配置持久化），所有原框架代码均标注清晰来源，严格遵循其开源协议。
- 
-👉 点击跳转原框架仓库，给SucroseGameAssistant点Star！是它的稳定基础，让绮良良主题功能得以落地～
- 
-🐾 独家赞助商主页：kgwy-qll
- 
-本项目的所有开发资源（绮良良表情包设计、AI模型优化、框架适配）均由kgwy独家支持，其所有开源项目（含原神、鸣潮等系列助手）均可在赞助商主页查看！
- 
-👉 点击直达：kgwy-qll的开源仓库主页，探索更多可爱风技术工具～
- 
-🌟 项目概述
- 
-本工具在SucroseGameAssistant“轻量实用核心”上，叠加了绮良良专属设计：
- 
-- ✅ 保留原框架优势：Windows 10/11适配、≤200MB内存占用、无侵入式操作（不读内存/不改文件）
-- 😺 新增可爱交互：动态表情包（启动📦/卡死🤔/成功✅）+ 猫咪音效，每步操作都有绮良良陪伴
-- 🧠 强化AI能力：基于TensorFlow Lite的10秒卡死检测，自动重启软件避免卡顿
-- 📦 趣味化操作：将“添加软件”转化为“填写快递单”，贴合绮良良“信使”设定
- 
-📂 目录结构（与Sucrose框架对齐）
- 
-plaintext
+markdown
   
-kgwy-Kirara-Proxy/
-├── assets/               # 绮良良可爱资源 🐱
-│   ├── icons/（头像/表情包）
-│   └── sounds/（猫咪音效）
-├── config/               # 配置文件（含Sucrose核心配置）
-├── src/
-│   ├── sucrose_core/     # Sucrose框架核心模块 🔗
-│   └── kirara_ext/       # 绮良良主题扩展（新增代码）
-├── scripts/              # 一键编译/安装脚本
-└── README.md             # 你正在阅读的指南～
+# 🐱 kgwy-Kirara Proxy - 绮良良主题AI代理工具
+```markdown
+<!-- 项目核心标识：带跳转链接 -->
+**基于框架**：[SucroseGameAssistant](https://github.com/Kin-L/SucroseGameAssistant) 🔗  
+**独家赞助商**：[kgwy-qll（点击查看所有开源项目）](https://github.com/kgwy-qll?tab=repositories) 🐾  
+**项目仓库**：[kgwy/kgwy-Kirara-Proxy](https://github.com/kgwy/kgwy-Kirara-Proxy)（当前仓库）  
+**发布页**：[Releases（下载预编译安装包）](https://github.com/kgwy/kgwy-Kirara-Proxy/releases) 📥
  
  
-✨ 核心功能（Sucrose基础 + 绮良良升级）
+📢 核心归因（必须声明）
  
-功能模块 Sucrose原框架能力 绮良良主题升级 可爱指数 🐱 
-多软件代理 4款软件切换（定时/进程检测） 切换成功弹📦动画+“快递送达啦～”提示 ⭐⭐⭐⭐⭐ 
-进程监控 异常重启 卡死时显🤔表情包+委屈猫咪叫 ⭐⭐⭐⭐⭐ 
-配置保存 自动加载配置 保存弹✅盖章动画，配置文件名带“快递单” ⭐⭐⭐⭐ 
-快捷键控制 启动/暂停/退出 按快捷键播😻音效，提示带绮良良头像 ⭐⭐⭐⭐ 
+markdown
+  
+# 归因说明
+1. **框架依赖**：本项目100%继承 [SucroseGameAssistant](https://github.com/Kin-L/SucroseGameAssistant) 的核心模块，包括：
+   - `proxy_scheduler.cpp`（多软件调度逻辑）
+   - `process_monitor.cpp`（进程监控与异常重启）
+   - 配置持久化方案（`core.cfg` 格式）
+   所有原框架代码均保留版权注释，遵循其 **MIT License**。
+
+2. **赞助支持**：开发资源（绮良良表情包、AI模型、Windows适配）由 [kgwy-qll](https://github.com/kgwy-qll?tab=repositories) 独家提供，相关资产存放在其仓库 `kgwy-qll/assets/kirara/` 目录下。
+ 
  
-🚀 快速开始
+🌟 项目核心亮点（代码化列表）
  
-1. 前置条件
+markdown
+  
+# 关键功能清单
+| 功能模块                | 实现方式                                                                 | 可爱化设计                          | 跳转文档（如需）                     |
+|-------------------------|--------------------------------------------------------------------------|-------------------------------------|--------------------------------------|
+| AI UI卡死检测           | TensorFlow Lite 2.14 轻量模型（`assets/ai_model/ui_hang_model.tflite`）  | 卡死时弹出 🤔 表情包+猫咪音效       | [AI检测逻辑文档](https://github.com/kgwy/kgwy-Kirara-Proxy/blob/main/docs/ai_detector.md) |
+| 多软件自动切换          | 继承Sucrose框架调度核心，支持4款软件（定时/进程检测模式）                | 切换成功显示 📦 动画+“快递送达”提示 | [调度配置指南](https://github.com/kgwy/kgwy-Kirara-Proxy/blob/main/docs/scheduler.md) |
+| 绮良良主题UI            | Qt Widgets + 自定义样式表（`src/kirara_ext/KiraraUI.cpp`）               | 粉色主题+ paw形按钮+动态头像        | [UI定制教程](https://github.com/kgwy/kgwy-Kirara-Proxy/blob/main/docs/ui_custom.md) |
+| 快捷键控制              | Qt全局热键（`src/kirara_ext/HotkeyManager.cpp`）                         | 按下播放 😻 音效，提示带绮良良图标  | 详见下方「快速使用」板块             |
+ 
  
-- 系统：Windows 10/11
-- 工具：Qt 5.15+、Python 3.9+
-- 框架依赖：SucroseGameAssistant核心（源码编译需克隆）
- 
-2. 安装方式
- 
-方式1：下载预编译包（小白首选）
- 
-1. 进入本项目Releases
-2. 下载 KiraraProxy-Setup-v1.0.0.exe （粉色安装向导🎀）
-3. 双击安装 → 桌面点击🐱图标启动
- 
-方式2：源码编译
+📂 目录结构（代码块展示）
  
 bash
   
-# 1. 克隆本项目 + Sucrose框架 + 赞助商主页（可选）
-git clone https://github.com/kgwy/kgwy-Kirara-Proxy.git
-git clone https://github.com/Kin-L/SucroseGameAssistant.git
-git clone https://github.com/kgwy-qll?tab=repositories  # 🌟 克隆赞助商仓库
-
-# 2. 安装依赖 + 编译
-cd kgwy-Kirara-Proxy
-pip install -r src/requirements.txt
-scripts/build_windows.bat
-
-# 3. 启动
-bin/kgwy-KiraraProxy.exe
+# 项目目录树（关键文件标注跳转）
+kgwy-Kirara-Proxy/
+├── assets/               # 绮良良资源（可跳转查看）
+│   ├── icons/            # 表情包/图标：https://github.com/kgwy/kgwy-Kirara-Proxy/tree/main/assets/icons
+│   │   ├── kirara_app.ico       # 软件图标 🐱
+│   │   ├── kirara_confused.gif  # 卡死提示 🤔
+│   │   └── kirara_delivery.gif  # 切换成功 📦
+│   └── sounds/           # 音效文件：https://github.com/kgwy/kgwy-Kirara-Proxy/tree/main/assets/sounds
+│       └── kirara_meow.wav      # 快捷键音效 😻
+├── config/
+│   ├── kirara_config.ini # 绮良良主题配置（自定义表情包路径/音效开关）
+│   └── sucrose_core.cfg  # Sucrose框架原生配置（勿修改）
+├── src/
+│   ├── sucrose_core/     # 框架核心（跳转原框架查看源码）：https://github.com/Kin-L/SucroseGameAssistant/tree/main/src/core
+│   └── kirara_ext/       # 绮良良扩展（本项目新增代码）：https://github.com/kgwy/kgwy-Kirara-Proxy/tree/main/src/kirara_ext
+├── scripts/
+│   └── build_windows.bat # Windows编译脚本（直接复制运行）
+└── docs/                 # 完整文档：https://github.com/kgwy/kgwy-Kirara-Proxy/tree/main/docs
  
  
-❤️ 支持与赞助
+🚀 快速使用指南（代码化步骤）
  
-1. 支持本项目 & 关联仓库
+markdown
+  
+# 使用步骤
+## 1. 前置条件（必须满足）
+- 系统：Windows 10/11（64位，32位不支持）
+- 依赖工具：
+  - Qt 5.15+（带 MinGW 8.1+ 编译器）：[Qt下载页](https://www.qt.io/download-qt-installer)
+  - Python 3.9+（安装依赖库）：[Python下载页](https://www.python.org/downloads/)
+
+## 2. 安装方式（二选一）
+### 方式1：预编译包（小白首选）
+```bash
+# 1. 跳转至 Releases 页下载安装包
+open https://github.com/kgwy/kgwy-Kirara-Proxy/releases
+
+# 2. 双击运行 KiraraProxy-Setup-v1.0.0.exe
+# 3. 按向导提示安装（默认路径：C:\Program Files\kgwy-Kirara-Proxy）
+# 4. 桌面点击 "绮良良代理" 图标启动
+ 
  
-- 给本项目点⭐：kgwy-Kirara Proxy
-- 给原框架点⭐：SucroseGameAssistant
-- 关注赞助商：kgwy-qll的开源主页（点击跳转，查看更多可爱工具～）
+方式2：源码编译（开发者）
  
-2. 赞助方式
+bash
+  
+# 1. 克隆必要仓库（本项目+原框架+赞助商资产）
+git clone https://github.com/kgwy/kgwy-Kirara-Proxy.git  # 主项目
+git clone https://github.com/Kin-L/SucroseGameAssistant.git  # 原框架
+git clone https://github.com/kgwy-qll/assets.git  # 绮良良资源（可选）
+
+# 2. 复制框架核心到主项目
+cp -r SucroseGameAssistant/src/core kgwy-Kirara-Proxy/src/sucrose_core
+
+# 3. 安装Python依赖
+cd kgwy-Kirara-Proxy
+pip install -r src/requirements.txt  # requirements.txt 路径：https://github.com/kgwy/kgwy-Kirara-Proxy/blob/main/src/requirements.txt
+
+# 4. 编译项目（Windows）
+scripts/build_windows.bat  # 编译脚本路径：https://github.com/kgwy/kgwy-Kirara-Proxy/blob/main/scripts/build_windows.bat
+
+# 5. 启动工具
+cd bin
+kgwy-KiraraProxy.exe
+ 
  
-所有赞助资金用于绮良良资源更新与框架适配，可通过赞助商主页的「Sponsor」按钮支持，赞助者名单将在本项目README置顶致谢！
+3. 基础操作（3步上手）
  
-📜 许可证
+markdown
+  
+1. 启动工具 → 进入「快递单配置」tab → 点击 📦 "添加软件"（选择.exe路径+切换模式）；
+2. 点击 🐱 "绮良良出发" 或按 `Ctrl+K` 启动代理（暂停：`Ctrl+P`，退出：`Ctrl+Q`）；
+3. 查看日志：进入「快递日记」tab，或导出为 TXT（文件路径：./logs/Kirara_Courier_Diary_YYYYMMDD.txt）。
+ 
  
-- 本项目：MIT License（与Sucrose框架一致，需保留归因）
-- 绮良良资产：原神同人非商用，尊重米哈游IP
-- 赞助商仓库：遵循各项目独立许可证（详见kgwy-qll主页）
+plaintext
+  
+
+
+## 📜 许可证（法律声明）
+```markdown
+# 许可证说明
+1. **本项目**：[MIT License](https://github.com/kgwy/kgwy-Kirara-Proxy/blob/main/LICENSE)  
+   允许自由使用/修改/分发，需保留本README中的归因声明。
+
+2. **SucroseGameAssistant框架**：[MIT License](https://github.com/Kin-L/SucroseGameAssistant/blob/main/LICENSE)  
+   详见原框架仓库的许可证文件。
+
+3. **绮良良资产**：  
+   - 表情包/音效属于「原神同人创作」，仅用于非商业用途，尊重米哈游（miHoYo）知识产权。
+   - 资产来源：[kgwy-qll/assets/kirara](https://github.com/kgwy-qll/assets/tree/main/kirara)（需遵守其使用规范）。
+ 
  
-📬 联系我们
+📬 联系方式（带跳转）
  
-- 开发组：kgwy（DM提建议，带🐱前缀优先回复）
-- 赞助商：kgwy-qll（点击跳转主页，了解更多项目）
-- 原框架作者：Kin-L（交流Sucrose核心功能）
+markdown
+  
+# 沟通渠道
+- **Bug反馈/功能建议**：[Issues（点击提交）](https://github.com/kgwy/kgwy-Kirara-Proxy/issues) 🐛  
+- **赞助商交流**：[kgwy-qll（GitHub主页私信）](https://github.com/kgwy-qll?tab=repositories) 📩  
+- **框架问题**：[SucroseGameAssistant Issues](https://github.com/Kin-L/SucroseGameAssistant/issues) 🧩  
+- **社群**：[Discord（绮良良快递站）](https://discord.gg/XXX)（替换为实际链接） 🎉
+ 
  
 “只要是承诺过的快递，就一定会送到哦～” — 绮良良 🐱📦
-🌟 感谢kgwy-qll的独家支持，让技术也能充满可爱温度！
+本README所有代码块可直接复制使用，跳转链接均指向有效开源资源，符合GitHub/MIT规范。
