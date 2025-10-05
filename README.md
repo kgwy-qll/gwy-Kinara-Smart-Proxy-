@@ -1,356 +1,180 @@
-# kgwy-Kinara-Smart
-绮良良
-kgwy-Kinara Smart Proxy - 开源完整方案
+🐱 kgwy-Kirara Proxy - 绮良良主题AI代理工具（开源完整版）
  
-以下是适配开源平台（GitHub/GitLab）的 kgwy-Kinara Smart Proxy 完整版，包含可直接上传的仓库结构、核心代码、文档说明、赞助入口与用户下载指南，确保用户能快速理解、使用并支持项目。
+An open-source, cute-themed AI proxy tool inspired by Kirara (Genshin Impact’s cat-ear courier) — built for efficiency, packed with charm, and ready to "deliver" a seamless experience! 📦
  
-一、开源仓库结构（标准GitHub/GitLab目录）
+🌟 Project Overview
+ 
+This tool combines AI-powered UI hang detection and auto software switching with Kirara’s iconic pink-cat aesthetic. It’s lightweight (≤200MB runtime), compliant (no memory reading/game modification), and perfect for streamlining daily tasks — all while keeping the vibe fun and cozy.
+ 
+🎨 Core Vibe: Kirara’s "courier spirit" → Every feature is framed as a "delivery task" (e.g., adding software = "creating a delivery slip", switching apps = "dropping off a package").
+ 
+📂 Directory Structure
  
 plaintext
   
-kgwy-Kinara-Smart-Proxy/
-├── .github/                # GitHub配置（ISSUE模板、赞助按钮）
-│   ├── ISSUE_TEMPLATE/
-│   │   ├── bug_report.md   # Bug反馈模板
-│   │   └── feature_request.md # 功能需求模板
-│   └── FUNDING.yml         # GitHub赞助配置（关联kgwy收款方式）
-├── 3rdparty/               # 第三方依赖库（预编译Windows版本）
-│   ├── sugar-proxy-1.2/    # 砂糖代理框架
-│   ├── opencv-4.8.0/       # OpenCV（截图识别）
-│   └── tensorflow-lite-2.14/ # TFLite（AI检测）
-├── assets/                 # 视觉资源（Kinara形象、表情包）
-│   ├── icons/
-│   │   ├── app_icon.ico    # 软件图标（Kinara头像）
-│   │   ├── running.gif     # 运行中表情包
-│   │   ├── success.gif     # 成功表情包
-│   │   ├── error.gif       # 错误表情包
-│   │   └── hang.gif        # 卡死表情包
-│   └── sponsor/
-│       ├── kgwy_alipay.png # kgwy支付宝收款码
-│       └── kgwy_wechat.png # kgwy微信收款码
-├── config/                 # 配置文件
-│   ├── ai_model/
-│   │   └── ui_hang_model.tflite # AI界面卡死检测模型
-│   └── smtp_template.ini   # 邮箱通知模板
-├── docs/                   # 文档
-│   ├── install_guide.md    # 安装指南
-│   ├── user_manual.md      # 使用手册
-│   └── dev_guide.md        # 开发指南
-├── scripts/                # 辅助脚本
-│   ├── build_windows.bat   # Windows编译脚本（MinGW）
-│   └── package_inno.iss    # Inno Setup打包脚本（生成安装包）
-├── src/                    # 核心代码
-│   ├── main.cpp            # 程序入口
-│   ├── MainWindow.cpp      # 主窗口（含Kinara表情包交互）
-│   ├── SugarProxyIntegration.cpp # 砂糖代理集成
-│   ├── AIDetector.cpp      # AI界面卡死检测
-│   ├── SoftAutoRunner.cpp  # 软件自动化（启动/切换）
-│   ├── EmailNotifier.cpp   # 邮箱通知
-│   └── SponsorManager.cpp  # 赞助入口管理
-├── ui/                     # UI布局文件
-│   ├── MainWindow.ui       # 主窗口UI
-│   ├── SoftConfigDialog.ui # 软件配置对话框
-│   └── SponsorDialog.ui    # 赞助弹窗UI
-├── include/                # 头文件
-│   ├── MainWindow.h
-│   ├── SugarProxyIntegration.h
-│   ├── AIDetector.h
-│   ├── SoftAutoRunner.h
-│   ├── EmailNotifier.h
-│   └── SponsorManager.h
-├── res/                    # 资源文件索引
-│   └── KinaraAssets.qrc    # 关联assets目录下的图片/表情包
-├── LICENSE                 # MIT开源协议
-├── README.md               # 项目首页（用户第一眼看到的内容）
-└── KinaraProxy.pro         # Qt项目配置文件（编译入口）
+kgwy-Kirara-Proxy/
+├── assets/               # Kirara-themed resources (the cute stuff!)
+│   ├── icons/            # Emojis, app icon, and UI graphics
+│   │   ├── kirara_app.ico       # App icon (Kirara’s face) 🐱
+│   │   ├── kirara_confused.gif  # For UI hang alerts 🤔
+│   │   ├── kirara_delivery.gif  # For successful app switches 📦
+│   │   └── kirara_stamp.png     # For saved configs ✅
+│   ├── sounds/
+│   │   └── kirara_meow.wav      # Meow sound for hotkeys 😺
+│   └── ai_model/
+│       └── ui_hang_model.tflite # Lightweight AI model (1.2MB)
+├── config/
+│   └── config.ini        # Customizable settings (theme, AI, hotkeys)
+├── docs/                 # User guides + screenshots
+│   ├── install_guide.md  # Step-by-step setup (with pics!)
+│   └── screenshots/
+│       ├── main_ui.png   # Main window (pink + Kirara emoji)
+│       └── config_ui.png # Software setup page ("delivery slips")
+├── scripts/              # One-click tools for devs
+│   ├── build_windows.bat # Compile for Windows (MinGW)
+│   └── package_inno.iss  # Create installer (Kirara-themed wizard)
+├── src/                  # Core code (clean + commented)
+│   ├── main.cpp          # App entry (loads theme + init)
+│   ├── KiraraProxy.h/cpp # AI logic + app switching
+│   ├── KiraraUI.h/cpp    # Pink UI + emoji rendering
+│   └── AIDetector.h/cpp  # UI hang detection (TensorFlow Lite)
+├── KiraraProxy.pro       # Qt project config (ready to build)
+├── LICENSE               # MIT License (free to use/modify)
+└── README.md             # You’re reading this! 😊
  
  
-二、核心文档（用户/开发者友好）
+✨ Key Features (Kirara-Style!)
  
-1. README.md（开源平台首页）
+Feature What It Does Cute Twist 🐱 
+AI UI Hang Detection Monitors apps for stuck interfaces (10s checks) using TensorFlow Lite. Shows Kirara’s confused GIF + "Package stuck! Restarting~" alert. 
+Auto App Switching Cycles up to 4 apps (2 modes: Timer or Process Detection). Plays delivery GIF + "Next package delivered!" when switching. 
+Kirara-Themed UI Soft pink palette, round buttons (like cat paws!), and dynamic emojis. UI scales with screen size (1080P/2K friendly). 
+"Delivery Logs" Logs all events (starts, switches, hangs) with timestamps. Exportable as TXT. Logs named  Kirara_Courier_YYYYMMDD.txt  (cute archive!). 
+Custom Hotkeys Quick controls for daily use (no mouse needed!). Plays meow sound when pressed (toggleable in config). 
  
-markdown
+Default Hotkeys
+ 
+Action Hotkey 
+Start Proxy  Ctrl + K  
+Pause Proxy  Ctrl + P  
+Exit Proxy  Ctrl + Q  
+Open Logs  Ctrl + L  
+ 
+🚀 Quick Start
+ 
+1. Prerequisites
+ 
+- OS: Windows 10/11 (32/64-bit; macOS/Linux coming soon!)
+- Tools: Qt 5.15+ (with MinGW 8.1+), Python 3.9+ (for dependencies)
+- Hardware: CPU supporting SSE4.2 (for TensorFlow Lite), ≥2GB RAM
+ 
+2. Install
+ 
+Option 1: Download Prebuilt Installer (Easiest!)
+ 
+1. Go to the Releases Page
+2. Download  KiraraProxy-Setup-v1.0.0.exe 
+3. Run the installer → Follow Kirara’s pink-themed wizard (click "Next" 3x!)
+4. Launch from desktop shortcut (Kirara’s icon 🐱)
+ 
+Option 2: Build from Source (For Devs)
+ 
+bash
   
-# kgwy-Kinara Smart Proxy 🐱💻
-A cute-style open-source proxy tool driven by **Kinara** (pink twin-tailed girl), integrated with AI UI hang detection, software automation, and email notifications. Sponsored by [kgwy](https://github.com/kgwy).
+# 1. Clone the repo
+git clone https://github.com/kgwy/kgwy-Kirara-Proxy.git
+cd kgwy-Kirara-Proxy
 
-## 🌟 Key Features
-- **AI-Powered UI Hang Detection**: Automatically detect if the software interface is stuck, with Kinara's emoji feedback.
-- **Software Automation**: Support 4 custom softwares, auto-start via screenshot recognition, cycle switching (timer/process detection mode).
-- **Cute Emoji Feedback**: Kinara's dynamic emojis show running status (running/success/error/hang).
-- **Email Notifications**: Auto-send status emails (start/switch/stuck) to your inbox.
-- **Lightweight & Open-Source**: Based on Sugar Proxy framework, small size, MIT license.
+# 2. Install dependencies (Qt + Python libs)
+# - Qt: Download from https://www.qt.io/download (select 5.15 + MinGW)
+# - Python: Run `pip install -r src/requirements.txt`
 
-## 📸 Kinara's Emoji Status
-| Status       | Emoji                  | Description                     |
-|--------------|------------------------|---------------------------------|
-| Running      | ![Running](assets/icons/running.gif) | Kinara is starting the software! |
-| Success      | ![Success](assets/icons/success.gif) | Software switched successfully! |
-| Error        | ![Error](assets/icons/error.gif)     | Oops, something went wrong!     |
-| UI Hang      | ![Hang](assets/icons/hang.gif)       | Interface stuck, need help?     |
+# 3. Compile (Windows)
+scripts/build_windows.bat
 
-## 🚀 Quick Start
-### 1. Download
-- **Latest Release**: [Click here](https://github.com/kgwy/kgwy-Kinara-Smart-Proxy/releases) to download the Windows installer (KinaraProxy-Setup.exe).
-- **Source Code**: Clone this repo: `git clone https://github.com/kgwy/kgwy-Kinara-Smart-Proxy.git`
-
-### 2. Install
-- Double-click `KinaraProxy-Setup.exe`, follow the wizard (with Kinara's cute installation interface).
-- No extra dependencies needed (all included in the installer).
-
-### 3. Use
-1. Open the software, click **"Add Software"** to configure up to 4 softwares:
-   - Upload the screenshot of the software's start button (for recognition).
-   - Choose mode: Timer (auto-switch after N seconds) / Process Detection (switch when software exits).
-2. Click **"Start Cycle"** to run automatically.
-3. Check email for status notifications (configure SMTP in "Settings" first).
-
-## 🛠️ Development Guide
-### Dependencies
-- Qt 5.15+ (with Widgets/Network modules)
-- OpenCV 4.8.0 (screenshot recognition)
-- TensorFlow Lite 2.14 (AI hang detection)
-- Sugar Proxy 1.2 (proxy framework)
-
-### Build
-1. Install Qt 5.15+ and add to system PATH.
-2. Run `scripts/build_windows.bat` (Windows) to compile the source code.
-3. The output is in `bin/` directory.
-
-### Package
-1. Install Inno Setup 6+.
-2. Open `scripts/package_inno.iss` with Inno Setup.
-3. Click "Run" (F9) to generate the installer.
-
-## ❤️ Sponsor kgwy
-This project is sponsored by **kgwy** and maintained by the open-source community. If you like Kinara Proxy, please support us to keep updating!
-
-### Sponsorship Ways
-- **GitHub Sponsors**: [Sponsor kgwy on GitHub](https://github.com/sponsors/kgwy)
-- **Alipay**: ![Alipay](assets/sponsor/kgwy_alipay.png)
-- **WeChat Pay**: ![WeChat](assets/sponsor/kgwy_wechat.png)
-
-### Sponsor Benefits
-| Tier         | Monthly Amount | Benefits                                                                 |
-|--------------|----------------|--------------------------------------------------------------------------|
-| Rice Ball Supporter | ¥5        | Exclusive Discord access, weekly "Kinara's Rice Ball Diary" tech newsletter. |
-| Pro Developer | ¥50         | All above + Priority bug fix (24h response), 1 custom Kinara emoji/year. |
-| Enterprise Partner | ¥500    | All above + Dedicated tech support (8h/month), private deployment, brand logo on README. |
-
-## 📄 License
-[MIT License](LICENSE) - Free for commercial and non-commercial use, please keep the original copyright notice.
-
-## 🤝 Contribute
-1. Fork this repo.
-2. Create a feature branch: `git checkout -b feature/your-feature`.
-3. Commit your changes: `git commit -m "Add your feature"`.
-4. Push to the branch: `git push origin feature/your-feature`.
-5. Open a Pull Request.
-
-## 📧 Contact
-- GitHub: [kgwy](https://github.com/kgwy)
-- Email: kgwy@example.com (replace with your actual email)
+# 4. Launch the app
+bin/kgwy-KiraraProxy.exe
  
  
-2. install_guide.md（安装指南）
+3. Use the Tool (3 Simple Steps!)
  
-markdown
-  
-# kgwy-Kinara Smart Proxy - Installation Guide
-This guide helps you install Kinara Proxy on Windows 10/11 (32/64-bit).
-
-## 📋 Prerequisites
-- Windows 10/11 (32/64-bit)
-- At least 100MB free disk space
-- Internet connection (for email notifications, optional)
-
-## 🚀 Step-by-Step Installation
-### 1. Download the Installer
-Go to the [Releases page](https://github.com/kgwy/kgwy-Kinara-Smart-Proxy/releases) and download the latest `KinaraProxy-Setup.exe`.
-
-### 2. Run the Installer
-- Double-click `KinaraProxy-Setup.exe`. If a "User Account Control" prompt pops up, click "Yes".
-- You'll see Kinara's welcome interface (pink theme with Kinara's avatar). Click "Next".
-
-### 3. Accept the License
-- Read the MIT License (short and friendly), check "I accept the terms in the License Agreement", then click "Next".
-
-### 4. Choose Installation Path
-- Default path: `C:\Program Files\kgwy-Kinara Smart Proxy` (recommended for most users).
-- If you want to change the path, click "Browse" and select a folder, then click "Next".
-
-### 5. Select Additional Tasks
-- Check "Create a desktop shortcut" (easy to launch later).
-- Check "Add to Start Menu" (optional), then click "Next".
-
-### 6. Install
-- Click "Install" to start the installation. The progress bar will show Kinara's loading animation.
-- Wait for 1-2 minutes (depending on your computer speed).
-
-### 7. Complete the Installation
-- Click "Finish". If you check "Launch kgwy-Kinara Smart Proxy now", the software will open immediately.
-
-## ❌ Troubleshooting Installation Issues
-### 1. "Installer failed to start"
-- Cause: Missing Windows updates or antivirus blocking.
-- Fix: Update Windows to the latest version, temporarily disable antivirus, then re-run the installer.
-
-### 2. "Insufficient disk space"
-- Cause: Not enough free space in the selected path.
-- Fix: Choose another drive with at least 100MB free space.
-
-### 3. "Permission denied"
-- Cause: No admin rights.
-- Fix: Right-click the installer, select "Run as administrator".
-
-## 📞 Get Help
-If you encounter other issues, please open an [Issue](https://github.com/kgwy/kgwy-Kinara-Smart-Proxy/issues) on GitHub, or contact kgwy via email: kgwy@example.com.
- 
+1. Add "Delivery Slips" (Software)
+- Open the app → Go to the 快递单配置 (Delivery Slips) tab
+- Click 添加软件 (Add App) → Select an  .exe  file (e.g., WeChat, Chrome)
+- Choose a mode:
+- 🕒 Timer: Switch every X seconds (e.g., 300 = 5 mins)
+- 🛠️ Process Detection: Switch when the app closes
+- Click 保存配置 (Save Slip) (Kirara’s stamp icon pops up! ✅)
+2. Start "Delivery" (Proxy)
+- Click the 启动代理 (Start Delivery) button (or  Ctrl + K )
+- Kirara’s delivery GIF plays → First app launches automatically
+3. Check Logs (Optional)
+- Go to the 快递日志 (Delivery Logs) tab to see timestamps for all actions
+- Click 导出日志 (Export Logs) to save as a TXT file
  
-三、核心代码（确保可编译运行）
+🛠️ Tech Stack
  
-1. src/main.cpp（程序入口）
+Category Tools/Libraries 
+Core Language C++ (Qt 5.15) 
+AI & Computer Vision TensorFlow Lite 2.14 (UI hang detection), OpenCV 4.8.0 (screenshot checks) 
+UI/UX Qt Widgets (pink theme), Pillow (emoji rendering) 
+Automation PyAutoGUI (simulate inputs), psutil (process monitoring) 
+Packaging Inno Setup 6 (installer), Git (version control) 
  
-cpp
-  
-#include <QApplication>
-#include "MainWindow.h"
-#include "AIDetector.h"
-#include <QMessageBox>
-#include <QDir>
-
-int main(int argc, char *argv[])
-{
-    QApplication a(argc, argv);
-    
-    // Set app info
-    a.setApplicationName("kgwy-Kinara Smart Proxy");
-    a.setApplicationVersion("1.0.0");
-    a.setOrganizationName("kgwy");
-    a.setWindowIcon(QIcon(":/icons/app_icon.ico"));
-
-    // Initialize AI detector (load model from config)
-    AIDetector aiDetector;
-    QString modelPath = QDir::currentPath() + "/config/ai_model/ui_hang_model.tflite";
-    if (!QFile::exists(modelPath)) {
-        modelPath = QApplication::applicationDirPath() + "/config/ai_model/ui_hang_model.tflite";
-    }
-    if (!aiDetector.initModel(modelPath)) {
-        QMessageBox::warning(nullptr, "AI Model Warning", 
-            "AI UI hang detection model failed to load. This feature will be disabled.");
-    }
-
-    // Show main window
-    MainWindow w(&aiDetector);
-    w.show();
-
-    return a.exec();
-}
- 
+🤝 Contribute (Join the Courier Team!)
  
-2. src/MainWindow.cpp（主窗口+Kinara表情包交互）
+We’d love to have you help improve Kirara Proxy! Here’s how:
  
-cpp
-  
-#include "MainWindow.h"
-#include "ui_MainWindow.h"
-#include "SoftConfigDialog.h"
-#include "SponsorDialog.h"
-#include "EmailNotifier.h"
-#include <QDateTime>
-#include <QDebug>
-
-MainWindow::MainWindow(AIDetector *aiDetector, QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
-    , m_aiDetector(aiDetector)
-    , m_softAutoRunner(new SoftAutoRunner)
-    , m_emailNotifier(new EmailNotifier)
-{
-    ui->setupUi(this);
-    setWindowTitle("kgwy-Kinara Smart Proxy");
-
-    // Initialize Kinara emoji (show idle emoji first)
-    ui->lblKinaraEmoji->setPixmap(QPixmap(":/icons/running.gif").scaled(150, 150, Qt::KeepAspectRatio));
-
-    // Connect soft auto runner signals
-    connect(m_softAutoRunner, &SoftAutoRunner::statusChanged, this, [=](RunnerStatus status, const QString &emojiPath) {
-        // Update emoji
-        ui->lblKinaraEmoji->setPixmap(QPixmap(emojiPath).scaled(150, 150, Qt::KeepAspectRatio));
-        // Update status text
-        QString statusText;
-        switch (status) {
-            case RunnerStatus::IDLE: statusText = "Idle - Ready to start"; break;
-            case RunnerStatus::RUNNING: statusText = "Running - Kinara is working!"; break;
-            case RunnerStatus::SUCCESS: statusText = "Success - Software switched"; break;
-            case RunnerStatus::ERROR: statusText = "Error - Check configuration"; break;
-            case RunnerStatus::HANG: statusText = "Hang - Interface stuck, try restarting"; break;
-        }
-        ui->lblStatus->setText(statusText);
-        // Update log
-        ui->txtLog->append(QString("[%1] %2").arg(QDateTime::currentDateTime().toString("HH:mm:ss")).arg(statusText));
-    });
-
-    // Connect email notification signal
-    connect(m_softAutoRunner, &SoftAutoRunner::needSendEmail, this, [=](const QString &title, const QString &content) {
-        if (m_emailNotifier->isConfigured()) {
-            m_emailNotifier->sendEmail(title, content);
-            ui->txtLog->append(QString("[%1] Email sent: %2").arg(QDateTime::currentDateTime().toString("HH:mm:ss")).arg(title));
-        } else {
-            ui->txtLog->append("[Warning] Email not configured, skip sending");
-        }
-    });
-
-    // Connect AI hang detection (check every 30 seconds)
-    m_hangCheckTimer.setInterval(30000);
-    connect(&m_hangCheckTimer, &QTimer::timeout, this, &MainWindow::checkUIHang);
-
-    // Connect buttons
-    connect(ui->btnAddSoft, &QPushButton::clicked, this, &MainWindow::addSoftConfig);
-    connect(ui->btnStart, &QPushButton::clicked, this, [=]() {
-        m_softAutoRunner->startCycle();
-        m_hangCheckTimer.start();
-        ui->btnStart->setEnabled(false);
-        ui->btnStop->setEnabled(true);
-    });
-    connect(ui->btnStop, &QPushButton::clicked, this, [=]() {
-        m_softAutoRunner->stopCycle();
-        m_hangCheckTimer.stop();
-        ui->btnStart->setEnabled(true);
-        ui->btnStop->setEnabled(false);
-    });
-    connect(ui->btnSponsor, &QPushButton::clicked, this, [=]() {
-        SponsorDialog dialog(this);
-        dialog.exec();
-    });
-    connect(ui->btnEmailConfig, &QPushButton::clicked, this, &MainWindow::configureEmail);
-}
-
-MainWindow::~MainWindow()
-{
-    delete ui;
-    delete m_softAutoRunner;
-    delete m_emailNotifier;
-}
-
-// Add software configuration
-void MainWindow::addSoftConfig()
-{
-    SoftConfigDialog dialog(this);
-    if (dialog.exec() == QDialog::Accepted) {
-        SoftConfig config = dialog.getConfig();
-        if (m_softAutoRunner->addSoftConfig(config)) {
-            // Update software list
-            ui->lstSoft->addItem(QString("%1 (Mode: %2, Timeout: %3s)")
-                .arg(config.softName)
-                .arg(config.isTimerMode ? "Timer" : "Process Detection")
-                .arg(config.timeoutSec));
-            ui->txtLog->append(QString("[%1] Added software: %2").arg(QDateTime::currentDateTime().toString("HH:mm:ss")).arg(config.softName));
-        } else {
-            ui->txtLog->append("[Error] Failed to add software (max 4 or invalid template)");
-        }
-    }
-}
-
-// Configure email settings
-void MainWindow::configureEmail
+1. Report Bugs/Request Features
+ 
+- Open an Issue
+- For bugs: Add "🐛 Bug" in the title + steps to reproduce (e.g., "Kirara’s GIF doesn’t play on switch")
+- For features: Add "✨ Feature" + your idea (e.g., "Add Kirara’s voice lines for alerts")
+ 
+2. Submit Code
+ 
+1. Fork this repo → Create a branch:  git checkout -b feature/kirara-voice 
+2. Write code (keep it consistent with the pink-cat theme!)
+3. Commit:  git commit -m "Add Kirara voice line for success alerts" 
+4. Push:  git push origin feature/kirara-voice  → Open a Pull Request
+ 
+3. Design Contributions
+ 
+- Help update emojis/GIFs (Kirara’s expressions!)
+- Improve the installer’s pink theme
+- Add translation (e.g., English/Japanese for global users)
+ 
+❤️ Support the Project
+ 
+Building cute, useful tools takes time — your support keeps Kirara delivering!
+ 
+Way to Support Link/Action 
+Star the Repo Click the ⭐ button at the top of the GitHub page 
+Sponsor Me GitHub Sponsors (exclusive perks!) 
+Buy a Coffee Ko-fi (Kirara gets a fish snack! 🐟) 
+Share with Friends Post about it on Genshin communities/Reddit (tag #KiraraProxy) 
+ 
+Sponsor Perks
+ 
+- 🐱 Rice Ball Supporter ($5/month): Exclusive Discord access + weekly "Kirara’s Courier Diary"
+- 📦 Pro Courier ($20/month): Priority bug fixes (24h response) + custom Kirara emoji
+- 🌟 Enterprise Partner ($100/month): Dedicated support + your logo on the README
+ 
+📜 License
+ 
+This project is licensed under the MIT License — you can:
+ 
+- Use it for personal/commercial purposes
+- Modify the code (keep Kirara’s theme intact!)
+- Distribute it (include the original LICENSE file)
+ 
+See LICENSE for full details.
+ 
+📬 Contact
+ 
+- GitHub: @kgwy (DM me anytime!)
+- Discord: kgwy#1234 (Join the "Kirara’s Courier Hub" server!)
+- Email: kgwy.dev@example.com (For business collaborations)
+ 
+"只要是承诺过的快递，就一定会送到哦～" — Kirara 🐱📦
+Thanks for using Kirara Proxy! Let’s make daily tasks cuter, one "delivery" at a time.
