@@ -1,180 +1,152 @@
-🐱 kgwy-Kirara Proxy - 绮良良主题AI代理工具（开源完整版）
+Thanks for using Kirara Proxy! Let’s make daily tasks cuter, one "delivery" at a time.
+markdown
+  
+# 🐱 kgwy-Kirara Proxy - 绮良良主题AI代理工具（基于DGA砂糖代理框架）
+An open-source, hyper-cute AI proxy tool inspired by **Genshin Impact’s Kirara** — built on the [DGA Sugar Proxy Framework](https://github.com/your-dga-sugar-repo) (with clear attribution!) and packed with cat-ear charm that pops! 📦✨
+
+
+## 📢 Core Attribution & Sponsor
+- **Based On**: [DGA Sugar Proxy Framework](https://github.com/your-dga-sugar-repo) 🧩  
+  *Full respect to the original DGA Sugar Proxy project — this tool extends its core proxy logic with Kirara-themed UI/AI features, following open-source collaboration norms.*  
+- **Exclusive Sponsor**: [@kgwy](https://github.com/kgwy) 🐾  
+  *This project is made possible by kgwy’s support — from AI model optimization to Kirara asset design, every cute detail has their touch!*
+
+
+## 🌟 Project Overview
+This tool wraps **DGA Sugar Proxy’s stable proxy core** with Kirara’s iconic pink-cat vibe, adding AI-powered UI hang detection and dynamic emoji feedback. It’s:  
+- 🚀 **Efficient**: Auto-switch 4 apps + real-time stuck detection (10s interval)  
+- 🎨 **Cute**: Every button, alert, and log is Kirara-themed (paw-shaped corners! Meow sounds! 😺)  
+- 📜 **Compliant**: No memory reading/game modification — strictly follows DGA Sugar Proxy’s open-source protocol  
+- 🔗 **Linked**: Fully inherits DGA Sugar Proxy’s cross-software compatibility (supports Windows 10/11)  
+
+
+## 📂 Directory Structure (Aligned with DGA Sugar Proxy)
+ 
  
-An open-source, cute-themed AI proxy tool inspired by Kirara (Genshin Impact’s cat-ear courier) — built for efficiency, packed with charm, and ready to "deliver" a seamless experience! 📦
- 
-🌟 Project Overview
- 
-This tool combines AI-powered UI hang detection and auto software switching with Kirara’s iconic pink-cat aesthetic. It’s lightweight (≤200MB runtime), compliant (no memory reading/game modification), and perfect for streamlining daily tasks — all while keeping the vibe fun and cozy.
- 
-🎨 Core Vibe: Kirara’s "courier spirit" → Every feature is framed as a "delivery task" (e.g., adding software = "creating a delivery slip", switching apps = "dropping off a package").
- 
-📂 Directory Structure
+kgwy-Kirara-Proxy/
+├── assets/               # Kirara’s cute assets (emojis/sounds) 🐱
+│   ├── icons/
+│   │   ├── kirara_app.ico       # App icon (Kirara’s face!)
+│   │   ├── kirara_confused.gif  # UI hang alert 🤔
+│   │   ├── kirara_delivery.gif  # App switch success 📦
+│   │   └── kirara_stamp.png     # Config save ✅
+│   └── sounds/
+│       └── kirara_meow.wav      # Hotkey meow 😻
+├── config/
+│   ├── config.ini        # Kirara theme + DGA core settings 🛠️
+│   └── sugar_proxy.cfg   # Inherited DGA Sugar Proxy config (unchanged!)
+├── src/
+│   ├── core/             # DGA Sugar Proxy core (forked & attributed) 🧩
+│   │   └── sugar_proxy.cpp      # Original DGA proxy logic
+│   ├── kirara/           # Custom Kirara features (new code!) 🐾
+│   │   ├── KiraraUI.cpp          # Pink-themed UI
+│   │   ├── AIDetector.cpp        # AI hang detection
+│   │   └── EmojiManager.cpp      # Dynamic emoji rendering
+│   └── main.cpp          # Entry (DGA core + Kirara UI integration)
+├── scripts/
+│   ├── build_windows.bat # One-click compile (supports DGA dependencies)
+│   └── package_innosetup.iss     # Kirara-themed installer 📦
+├── KiraraProxy.pro       # Qt project (includes DGA Sugar Proxy paths)
+├── LICENSE               # MIT License (same as DGA Sugar Proxy)
+├── ATTRIBUTION.md        # Full DGA Sugar Proxy attribution doc 📜
+└── README.md             # You’re here! 😊
  
 plaintext
   
-kgwy-Kirara-Proxy/
-├── assets/               # Kirara-themed resources (the cute stuff!)
-│   ├── icons/            # Emojis, app icon, and UI graphics
-│   │   ├── kirara_app.ico       # App icon (Kirara’s face) 🐱
-│   │   ├── kirara_confused.gif  # For UI hang alerts 🤔
-│   │   ├── kirara_delivery.gif  # For successful app switches 📦
-│   │   └── kirara_stamp.png     # For saved configs ✅
-│   ├── sounds/
-│   │   └── kirara_meow.wav      # Meow sound for hotkeys 😺
-│   └── ai_model/
-│       └── ui_hang_model.tflite # Lightweight AI model (1.2MB)
-├── config/
-│   └── config.ini        # Customizable settings (theme, AI, hotkeys)
-├── docs/                 # User guides + screenshots
-│   ├── install_guide.md  # Step-by-step setup (with pics!)
-│   └── screenshots/
-│       ├── main_ui.png   # Main window (pink + Kirara emoji)
-│       └── config_ui.png # Software setup page ("delivery slips")
-├── scripts/              # One-click tools for devs
-│   ├── build_windows.bat # Compile for Windows (MinGW)
-│   └── package_inno.iss  # Create installer (Kirara-themed wizard)
-├── src/                  # Core code (clean + commented)
-│   ├── main.cpp          # App entry (loads theme + init)
-│   ├── KiraraProxy.h/cpp # AI logic + app switching
-│   ├── KiraraUI.h/cpp    # Pink UI + emoji rendering
-│   └── AIDetector.h/cpp  # UI hang detection (TensorFlow Lite)
-├── KiraraProxy.pro       # Qt project config (ready to build)
-├── LICENSE               # MIT License (free to use/modify)
-└── README.md             # You’re reading this! 😊
- 
- 
-✨ Key Features (Kirara-Style!)
- 
-Feature What It Does Cute Twist 🐱 
-AI UI Hang Detection Monitors apps for stuck interfaces (10s checks) using TensorFlow Lite. Shows Kirara’s confused GIF + "Package stuck! Restarting~" alert. 
-Auto App Switching Cycles up to 4 apps (2 modes: Timer or Process Detection). Plays delivery GIF + "Next package delivered!" when switching. 
-Kirara-Themed UI Soft pink palette, round buttons (like cat paws!), and dynamic emojis. UI scales with screen size (1080P/2K friendly). 
-"Delivery Logs" Logs all events (starts, switches, hangs) with timestamps. Exportable as TXT. Logs named  Kirara_Courier_YYYYMMDD.txt  (cute archive!). 
-Custom Hotkeys Quick controls for daily use (no mouse needed!). Plays meow sound when pressed (toggleable in config). 
- 
-Default Hotkeys
- 
-Action Hotkey 
-Start Proxy  Ctrl + K  
-Pause Proxy  Ctrl + P  
-Exit Proxy  Ctrl + Q  
-Open Logs  Ctrl + L  
- 
-🚀 Quick Start
- 
-1. Prerequisites
- 
-- OS: Windows 10/11 (32/64-bit; macOS/Linux coming soon!)
-- Tools: Qt 5.15+ (with MinGW 8.1+), Python 3.9+ (for dependencies)
-- Hardware: CPU supporting SSE4.2 (for TensorFlow Lite), ≥2GB RAM
- 
-2. Install
- 
-Option 1: Download Prebuilt Installer (Easiest!)
- 
-1. Go to the Releases Page
-2. Download  KiraraProxy-Setup-v1.0.0.exe 
-3. Run the installer → Follow Kirara’s pink-themed wizard (click "Next" 3x!)
-4. Launch from desktop shortcut (Kirara’s icon 🐱)
- 
-Option 2: Build from Source (For Devs)
- 
-bash
-  
-# 1. Clone the repo
+
+
+## ✨ Key Features (DGA Core + Kirara Flair)
+| Feature                  | DGA Sugar Proxy Base          | Kirara-Themed Upgrade                          | Cute Vibe 🐱 |
+|--------------------------|--------------------------------|------------------------------------------------|--------------|
+| Multi-App Proxy          | Supports 4-app switching       | "Delivery slip" UI (add apps = "create slips") | 📦 Add button = "New delivery" |
+| Process Monitoring       | Tracks app runtime             | AI hang detection (TensorFlow Lite)            | 🤔 Stuck alert = "Package jammed!" |
+| Config Persistence       | Saves proxy settings           | Kirara stamp icon + "Slip archived" prompt     | ✅ Save = "Stamp the slip!" |
+| Hotkey Control           | Basic start/pause              | Custom meow sounds + emoji feedback            | 😻 `Ctrl+K` = "Kirara出发!" |
+| Log Management           | Text-based logs                | "Delivery logs" (Kirara-named files: `Kirara_Courier_YYYYMMDD.txt`) | 📜 Logs = "Courier diary" |
+
+
+## 🚀 Quick Start (Inherits DGA Sugar Proxy Workflow)
+### 1. Prerequisites
+- Same as DGA Sugar Proxy: Windows 10/11, Qt 5.15+ (MinGW 8.1+), Python 3.9+  
+- Extra for Kirara features: TensorFlow Lite 2.14 (included in `assets/ai_model/`)
+
+
+### 2. Install (2 Options)
+#### Option 1: Prebuilt Installer (Easiest!)
+1. Go to [Releases](https://github.com/kgwy/kgwy-Kirara-Proxy/releases)  
+2. Download `KiraraProxy-Setup-v1.0.0.exe` (Kirara’s pink installer! 🎀)  
+3. Follow prompts → Check "Include DGA Sugar Proxy core files" (auto-enabled)  
+4. Launch from desktop (Kirara’s icon 🐱)
+
+
+#### Option 2: Build from Source (With DGA Core)
+```bash
+# 1. Clone THIS repo + DGA Sugar Proxy repo (required for core!)
 git clone https://github.com/kgwy/kgwy-Kirara-Proxy.git
+git clone https://github.com/your-dga-sugar-repo.git dga-sugar-proxy
+
+# 2. Link DGA core to our project
+cp -r dga-sugar-repo/src/core kgwy-Kirara-Proxy/src/core
+
+# 3. Install dependencies (DGA + Kirara)
+pip install -r kgwy-Kirara-Proxy/src/requirements.txt
+
+# 4. Compile (Windows)
 cd kgwy-Kirara-Proxy
-
-# 2. Install dependencies (Qt + Python libs)
-# - Qt: Download from https://www.qt.io/download (select 5.15 + MinGW)
-# - Python: Run `pip install -r src/requirements.txt`
-
-# 3. Compile (Windows)
 scripts/build_windows.bat
 
-# 4. Launch the app
+# 5. Launch (DGA core loads automatically!)
 bin/kgwy-KiraraProxy.exe
  
  
-3. Use the Tool (3 Simple Steps!)
+3. Use the Tool (3 Steps)
  
-1. Add "Delivery Slips" (Software)
-- Open the app → Go to the 快递单配置 (Delivery Slips) tab
-- Click 添加软件 (Add App) → Select an  .exe  file (e.g., WeChat, Chrome)
-- Choose a mode:
-- 🕒 Timer: Switch every X seconds (e.g., 300 = 5 mins)
-- 🛠️ Process Detection: Switch when the app closes
-- Click 保存配置 (Save Slip) (Kirara’s stamp icon pops up! ✅)
+1. Add "Delivery Slips" (Apps)
+- Open app → Go to 快递单配置 (Delivery Slips) tab
+- Click 📦 添加软件 (New Slip) → Select  .exe  (e.g., WeChat)
+- Choose mode (Timer/Process Detection) → Click ✅ 保存 (Stamp Slip)
 2. Start "Delivery" (Proxy)
-- Click the 启动代理 (Start Delivery) button (or  Ctrl + K )
-- Kirara’s delivery GIF plays → First app launches automatically
-3. Check Logs (Optional)
-- Go to the 快递日志 (Delivery Logs) tab to see timestamps for all actions
-- Click 导出日志 (Export Logs) to save as a TXT file
+- Press  Ctrl+K  or click 🚀 启动 (Kirara出发!)
+- Kirara’s delivery GIF plays → DGA core launches first app
+3. Check "Courier Logs"
+- Go to 📜 快递日志 (Logs) tab → Export as TXT (named with Kirara!)
  
-🛠️ Tech Stack
+🧩 DGA Sugar Proxy Attribution
  
-Category Tools/Libraries 
-Core Language C++ (Qt 5.15) 
-AI & Computer Vision TensorFlow Lite 2.14 (UI hang detection), OpenCV 4.8.0 (screenshot checks) 
-UI/UX Qt Widgets (pink theme), Pillow (emoji rendering) 
-Automation PyAutoGUI (simulate inputs), psutil (process monitoring) 
-Packaging Inno Setup 6 (installer), Git (version control) 
+This project directly uses and extends the DGA Sugar Proxy Framework:
  
-🤝 Contribute (Join the Courier Team!)
+- Core proxy logic: Forked from  dga-sugar-repo/src/core/sugar_proxy.cpp 
+- Process monitoring: Inherits  dga-sugar-repo/src/utils/process_monitor.h 
+- License: Follows DGA Sugar Proxy’s MIT License (see ATTRIBUTION.md for full details)
+- For original features/bugs: Visit the DGA Sugar Proxy GitHub
  
-We’d love to have you help improve Kirara Proxy! Here’s how:
+❤️ Support & Sponsor
  
-1. Report Bugs/Request Features
+Sponsor: @kgwy 🐾
  
-- Open an Issue
-- For bugs: Add "🐛 Bug" in the title + steps to reproduce (e.g., "Kirara’s GIF doesn’t play on switch")
-- For features: Add "✨ Feature" + your idea (e.g., "Add Kirara’s voice lines for alerts")
+- Why Sponsor? Funds go to Kirara asset updates (new GIFs/sounds) and DGA core compatibility fixes
+- Sponsor Perks:
+- 🐟 Rice Ball Tier ($5/month): Exclusive Kirara emojis + Discord access
+- 📦 Courier Tier ($20/month): Priority support (24h response) + custom UI themes
+- 🌟 Boss Tier ($100/month): Name in "Sponsor Wall" + co-design new Kirara features
  
-2. Submit Code
+Support the Project
  
-1. Fork this repo → Create a branch:  git checkout -b feature/kirara-voice 
-2. Write code (keep it consistent with the pink-cat theme!)
-3. Commit:  git commit -m "Add Kirara voice line for success alerts" 
-4. Push:  git push origin feature/kirara-voice  → Open a Pull Request
- 
-3. Design Contributions
- 
-- Help update emojis/GIFs (Kirara’s expressions!)
-- Improve the installer’s pink theme
-- Add translation (e.g., English/Japanese for global users)
- 
-❤️ Support the Project
- 
-Building cute, useful tools takes time — your support keeps Kirara delivering!
- 
-Way to Support Link/Action 
-Star the Repo Click the ⭐ button at the top of the GitHub page 
-Sponsor Me GitHub Sponsors (exclusive perks!) 
-Buy a Coffee Ko-fi (Kirara gets a fish snack! 🐟) 
-Share with Friends Post about it on Genshin communities/Reddit (tag #KiraraProxy) 
- 
-Sponsor Perks
- 
-- 🐱 Rice Ball Supporter ($5/month): Exclusive Discord access + weekly "Kirara’s Courier Diary"
-- 📦 Pro Courier ($20/month): Priority bug fixes (24h response) + custom Kirara emoji
-- 🌟 Enterprise Partner ($100/month): Dedicated support + your logo on the README
+1. Star THIS repo ⭐ + Star DGA Sugar Proxy (support the original!)
+2. Share on Genshin communities: Tag #KiraraProxy #DGASugarProxy
+3. Report bugs: Open Issues (add 🐛 in title!)
  
 📜 License
  
-This project is licensed under the MIT License — you can:
- 
-- Use it for personal/commercial purposes
-- Modify the code (keep Kirara’s theme intact!)
-- Distribute it (include the original LICENSE file)
- 
-See LICENSE for full details.
+- This project: MIT License (same as DGA Sugar Proxy)
+- DGA Sugar Proxy: See their LICENSE
+- Kirara assets: For non-commercial use (Genshin Impact fan work — respect miHoYo’s IP!)
  
 📬 Contact
  
-- GitHub: @kgwy (DM me anytime!)
-- Discord: kgwy#1234 (Join the "Kirara’s Courier Hub" server!)
-- Email: kgwy.dev@example.com (For business collaborations)
+- Kirara Proxy Dev: @kgwy (DM for feature requests!)
+- DGA Sugar Proxy Dev: Visit their GitHub
+- Discord: Join "Kirara’s Courier Hub" (link in Releases!)
  
 "只要是承诺过的快递，就一定会送到哦～" — Kirara 🐱📦
-Thanks for using Kirara Proxy! Let’s make daily tasks cuter, one "delivery" at a time.
+Built with love for Kirara, and respect for DGA Sugar Proxy’s open-source work!
